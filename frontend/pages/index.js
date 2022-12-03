@@ -44,9 +44,11 @@ export default function Home() {
             </button>
           </Link>
           <span className="italic text-md font-normal">or</span>
-          <button className={`  text-sm mt-0 ${styles.btn}`}>
-            Create a User Wallet
-          </button>
+          <Link href="/uregister" passHref>
+            <button className={`  text-sm mt-0 ${styles.btn}`}>
+              Create a User Wallet
+            </button>
+          </Link>
         </div>
       </div>
     </div>
