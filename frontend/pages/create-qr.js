@@ -7,8 +7,12 @@ const CreateQR = () => {
   const [scanResult, setScanResult] = useState("DONEEE");
 
   useEffect(() => {
-    const qrScanner = new QrScanner(document.getElementById("v"), (result) =>
-      console.log("decoded qr code:", setScanResult(result))
+    const qrScanner = new QrScanner(
+      document.getElementById("v"),
+      (result) => console.log("decoded qr code:", setScanResult(result)),
+      {
+        highlightScanRegion: true,
+      }
     );
     qrScanner.start();
   }, []);
