@@ -30,7 +30,7 @@ contract requestHandler is Ownable {
 
     address public EPNS_COMM_ADDRESS =
         0xb3971BCef2D791bc4027BbfedFb47319A4AAaaAa;
-    address public channelAddress = 0xb3971BCef2D791bc4027BbfedFb47319A4AAaaAa;
+    address public channelAddress = 0x62C43323447899acb61C18181e34168903E033Bf;
 
     struct PaymentRequest {
         address requestCreator;
