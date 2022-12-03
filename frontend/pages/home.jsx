@@ -85,7 +85,7 @@ export default function Home() {
         <div className="mt-3 mx-5">
         <Alert color="info">
           <span>
-            <span className="font-semibold">New Request!</span> Dhruv has requested $60
+            <span className="font-semibold">New UCPI Request!</span> Dhruv has requested $60
           </span>
         </Alert>
         </div>
