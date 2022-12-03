@@ -50,22 +50,3 @@ const CreatePK = () => {
 };
 
 export default CreatePK;
-
-export const createWallet = (password) => {
-  let randomWallet = ethers.Wallet.createRandom();
-  encrypt(password, randomWallet._signingKey().privateKey).then(function (
-    blob
-  ) {
-    localStorage.setItem("wallet", blob);
-  });
-};
-
-export const getWallet = (password) => {
-  decrypt(password, localStorage.getItem("wallet"))
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      console.log("error", err);
-    });
-};

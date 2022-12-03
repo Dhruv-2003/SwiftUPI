@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/Home.module.css";
+import { createWallet } from "../helper";
 
 export default function Mregister() {
+  const [pin, setPin] = useState("");
   return (
     <div className=" text-white flex flex-col">
       <div className="flex items-end justify-between px-4 border-b pb-3">
-        <h1 className=" text-xl text-center mx-auto mt-4 mb-0 font-bold">Register Merchant</h1>
+        <h1 className=" text-xl text-center mx-auto mt-4 mb-0 font-bold">
+          Register Merchant
+        </h1>
       </div>
       <h1 className=" text-2xl text-center font-bold mt-16 underline">
         {" "}
@@ -35,6 +39,8 @@ export default function Mregister() {
         </span>
       </label>
       <input
+        onChange={(e) => setPin(e.target.value)}
+        value={pin}
         type="password"
         pattern="[0-9]*"
         inputmode="numeric"
@@ -45,7 +51,9 @@ export default function Mregister() {
       />
 
       <div className="w-[85%] mx-auto mt-5 md:w-[27%]">
-        <button className={`${styles.btn} text-xs  `}>Register</button>
+        <button onClick={createWallet(pin)} className={`${styles.btn} text-xs`}>
+          Register
+        </button>
       </div>
     </div>
   );
