@@ -2,6 +2,40 @@
   padding: 0 2rem;
 }
 
+.btn {
+  width: 90%;
+  margin: 20px auto;
+  margin-bottom: 10px;
+  padding: 15px 30px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+  border-radius: 5px;
+  display: block;
+  border: 0px;
+  font-weight: 700;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(
+    45deg,
+    #2470d4 0%,
+    #6c56fa 51%,
+    #902fff 100%
+  );
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn:hover {
+  background-position: right center;
+  color: #fff;
+  text-decoration: none;
+}
+
+
 .main {
   min-height: 100vh;
   padding: 4rem 0;
