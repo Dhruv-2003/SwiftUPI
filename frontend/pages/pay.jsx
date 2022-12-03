@@ -8,7 +8,7 @@ export default function Pay() {
     <div className=" text-white flex flex-col px-4 py-6 text-center">
       <h1 className=" text-3xl mb-0 font-bold underline">SwiftUPI</h1>
       <div className="bg-purple-700 max-w-[200px] mx-auto rounded-xl mt-10   ">
-        <Image src={avatar} />
+        <Image src={avatar} alt="avatar" />
       </div>
       <span className="mt-12 text-xl font-bold">Kushagara Sarathe</span>
       <span className=" text-lg font-bold">kushagra@swift</span>
