@@ -39,21 +39,21 @@ contract profileWallet is Ownable, ERC721Holder {
         _;
     }
 
-    function validateUserOp(
-        UserOperation calldata userOp,
-        bytes32 requestId,
-        address aggregator,
-        uint256 missingWalletFunds
-    ) external {
-        bytes32 hash = userOpHash.toEthSignedMessageHash();
-        //ignore signature mismatch of from==ZERO_ADDRESS (for eth_callUserOp validation purposes)
-        // solhint-disable-next-line avoid-tx-origin
-        require(
-            owner == hash.recover(userOp.signature) || tx.origin == address(0),
-            "account: wrong signature"
-        );
-        return 0;
-    }
+    // function validateUserOp(
+    //     UserOperation calldata userOp,
+    //     bytes32 requestId,
+    //     address aggregator,
+    //     uint256 missingWalletFunds
+    // ) external {
+    //     bytes32 hash = userOpHash.toEthSignedMessageHash();
+    //     //ignore signature mismatch of from==ZERO_ADDRESS (for eth_callUserOp validation purposes)
+    //     // solhint-disable-next-line avoid-tx-origin
+    //     require(
+    //         owner == hash.recover(userOp.signature) || tx.origin == address(0),
+    //         "account: wrong signature"
+    //     );
+    //     return 0;
+    // }
 
     modifier onlyDev() {
         require(msg.sender == developer, "Not authorised");

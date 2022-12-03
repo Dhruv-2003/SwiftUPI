@@ -9,8 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@rainbow-me/rainbowkit": "^0.8.0",
+    "@lifi/widget": "^1.26.4",
     "@metamask/browser-passworder": "^4.0.2",
+    "@rainbow-me/rainbowkit": "^0.8.0",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "eslint": "8.28.0",
@@ -19,6 +20,7 @@
     "flowbite": "^1.5.4",
     "flowbite-react": "^0.3.6",
     "next": "13.0.6",
+    "next-transpile-modules": "^10.0.0",
     "qr-scanner": "^1.4.2",
     "qrcode": "^1.5.1",
     "react": "18.2.0",

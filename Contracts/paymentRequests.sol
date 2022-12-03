@@ -30,6 +30,7 @@ contract requestHandler is Ownable {
 
     address public EPNS_COMM_ADDRESS =
         0xb3971BCef2D791bc4027BbfedFb47319A4AAaaAa;
+    address public channelAddress = 0x62C43323447899acb61C18181e34168903E033Bf;
 
     struct PaymentRequest {
         address requestCreator;
@@ -50,7 +51,7 @@ contract requestHandler is Ownable {
     mapping(uint256 => PaymentRequest) public requests;
     uint32 public totalRequests;
 
-    mapping(address => requestForUser[]) public requestsForUser;
+    mapping(address => uint256[]) public requestsForUser;
 
     function sendNotViaPush(
         address _reciever,
@@ -103,14 +104,14 @@ contract requestHandler is Ownable {
     function createRequestDirect(
         address _payer,
         uint256 _amount,
-        string detailsURI
+        string memory detailsURI
     ) public returns (uint256 _id) {
         uint256 _requestId = totalRequests;
         requests[_requestId] = PaymentRequest(
             msg.sender,
             _amount,
-            payState.intiated,
-            detailsURI
+            detailsURI,
+            payState.intiated
         );
 
         sendNotViaPush(_payer, msg.sender, _amount);
@@ -123,14 +124,14 @@ contract requestHandler is Ownable {
     function createRequest(
         address creator,
         uint256 _amount,
-        string detailsURI
+        string memory detailsURI
     ) public returns (uint256 _id) {
         uint256 _requestId = totalRequests;
         requests[_requestId] = PaymentRequest(
             creator,
             _amount,
-            payState.intiated,
-            detailsURI
+            detailsURI,
+            payState.intiated
         );
         totalRequests += 1;
         return _requestId;
@@ -139,11 +140,11 @@ contract requestHandler is Ownable {
     /// Send Request if users enters an alias to the receiver -- CASE 2-1 Solved
     function sendRequest(uint32 requestId, address reciever) public {
         require(requestId <= totalRequests, "Use a Valid request ID");
-        PaymentRequest _request = requests[requestId];
+        PaymentRequest storage _request = requests[requestId];
         require(_request._state != payState.paid, "Request Already completed");
 
         sendNotViaPush(reciever, _request.requestCreator, _request.amount);
-        requestsForUser[_payer].push(_requestId);
+        requestsForUser[reciever].push(requestId);
         _request._state = payState.sent;
     }
 
@@ -152,7 +153,7 @@ contract requestHandler is Ownable {
     /// call when we want to complete the request
     function payRequest(uint32 requestId) public {
         require(requestId <= totalRequests, "Use a Valid request ID");
-        PaymentRequest _request = requests[requestId];
+        PaymentRequest storage _request = requests[requestId];
         require(_request._state != payState.paid, "Request Already completed");
         _request._state = payState.paid;
         emit RequestPaid(

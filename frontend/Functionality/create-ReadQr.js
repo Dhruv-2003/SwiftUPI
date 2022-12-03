@@ -4,12 +4,7 @@ import QrScanner from "qr-scanner"; // if installed via package and bundling wit
 
 const CreateQR = () => {
   const [qrUrl, setQrUrl] = useState();
-  const [videoElem, setVideoElem] = useState();
   const [scanResult, setScanResult] = useState();
-
-  //   useEffect(() => {
-  //     setVideoElem(document.getElementById("v"));
-  //   }, []);
 
   const createQRCode = async () => {
     const opts = {
@@ -47,28 +42,10 @@ const CreateQR = () => {
   };
 
   const scanneQR = () => {
-    // To enforce the use of the new api with detailed scan results, call the constructor with an options object, see below.
-    // const qrScanner = new QrScanner(
-    //   videoElem,
-    //   (result) => console.log("decoded qr code:", result),
-    //   {
-    //     /* your options or returnDetailedScanResult: true if you're not specifying any other options */
-    //   }
-    // );
-
-    // For backwards compatibility, omitting the options object will currently use the old api, returning scan results as
-    // simple strings. This old api will be removed in the next major release, by which point the options object is then
-    // also not required anymore to enable the new api.
-    const qrScanner = new QrScanner(
-      document.getElementById("v"),
-      (result) => console.log("decoded qr code:", setScanResult(result))
-      // No options provided. This will use the old api and is deprecated in the current version until next major version.
+    const qrScanner = new QrScanner(document.getElementById("v"), (result) =>
+      console.log("decoded qr code:", setScanResult(result))
     );
     qrScanner.start();
-
-    // QrScanner.scanImage(qrUrl)
-    //   .then((result) => console.log(result))
-    //   .catch((error) => console.log(error || "No QR code found."));
   };
   return (
     <div>

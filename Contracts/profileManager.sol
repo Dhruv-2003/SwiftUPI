@@ -10,7 +10,7 @@ Profile Manager , Issuer of  .swift alias , or other aliases can be stored in th
 - Deploy an Biconomy Smart Contract Wallet 
 */
 
-contract profileManger is Ownable {
+contract profileManager is Ownable {
     /// Struct storing the user details
     struct User {
         address userAddress;
@@ -42,7 +42,7 @@ contract profileManger is Ownable {
         string memory _qrCode
     ) public {
         require(SCWAddress != address(0), "Smart Contract Wallet is not Valid");
-        User _user = User(
+        User memory _user = User(
             msg.sender,
             SCWAddress,
             _swiftAlias,
@@ -58,18 +58,19 @@ contract profileManger is Ownable {
         emit UserCreated(msg.sender, _swiftAlias, _name);
     }
 
-    function updateSwiftAlias(string _newAlias) public {
-        User _user = userProfiles[msg.sender];
+    function updateSwiftAlias(string memory _newAlias) public {
+        User storage _user = userProfiles[msg.sender];
         _user.swiftId = _newAlias;
     }
 
-    function fetchUser(address user) public returns (User storage) {
+    function fetchUser(address user) public view returns (User memory) {
         return userProfiles[user];
     }
 
-    function fetchUserByAlias(string _swiftAlias)
+    function fetchUserByAlias(string memory _swiftAlias)
         public
-        returns (User storage)
+        view
+        returns (User memory)
     {
         return swiftIds[_swiftAlias];
     }
