@@ -1,7 +1,8 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-    
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import styles from "../styles/Home.module.css";
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -13,13 +14,13 @@ export default function Home() {
 
       <div className=" text-white">
         <h1 className="text-4xl text-center mt-6 font-bold underline">UCPI</h1>
-        <h1 className="text-center mx-auto italic mt-3">&#40;Unified Crypto Payment Interface&#41;</h1>
+        <h1 className="text-center mx-auto italic mt-3">
+          &#40;Unified Crypto Payment Interface&#41;
+        </h1>
         <h1 className="text-xl text-center mt-6 font-bold">
           Experience UPI on chain with ease
         </h1>
-        <p className="text-center mt-5">
-          Defination here
-        </p>
+        <p className="text-center mt-5">Defination here</p>
       </div>
 
       {/* <div className="mt-8">
@@ -27,7 +28,6 @@ export default function Home() {
       </div> */}
 
       {/* render when user is already registered */}
-     
 
       {/* render to ask user registeration */}
 
@@ -36,10 +36,12 @@ export default function Home() {
           Register Wallet
         </h2>
         <div className="mt-3 flex flex-col items-center justify-around text-xl font-bold">
-          <button className={`  text-sm mt-0 ${styles.btn}`}>
-            Create a Merchant Wallet
-          </button>
-          <span className="italic text-md font-normal" >or</span>
+          <Link href="/mregister" passHref>
+            <button className={`text-sm mt-0 ${styles.btn}`}>
+              Create a Merchant Wallet
+            </button>
+          </Link>
+          <span className="italic text-md font-normal">or</span>
           <button className={`  text-sm mt-0 ${styles.btn}`}>
             Create a User Wallet
           </button>

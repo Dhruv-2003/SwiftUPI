@@ -13,7 +13,7 @@ export default function GenerateQR() {
           <Image className="my-auto blur-sm" src={sampleqr} alt="qr" />
           <div className="  mx-2 absolute top-[70px]">
             <button
-              onClick={()=>createQRCode()}
+              onClick={() => createQRCode()}
               type="button"
               className=" w-[120px]  bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md"
             >
