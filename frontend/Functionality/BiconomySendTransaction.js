@@ -29,7 +29,7 @@ const BiconomySendTransaction = () => {
     }
   };
 
-  return <div>BiconomySendTransaction</div>;
+  return (<div><button>Send Transaction</button></div>);
 };
 
 export default BiconomySendTransaction;
