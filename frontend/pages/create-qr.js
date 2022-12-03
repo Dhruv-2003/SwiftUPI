@@ -5,10 +5,11 @@ import QrScanner from "qr-scanner"; // if installed via package and bundling wit
 const CreateQR = () => {
   const [qrUrl, setQrUrl] = useState();
   const [videoElem, setVideoElem] = useState();
+  const [scanResult, setScanResult] = useState();
 
-  useEffect(() => {
-    setVideoElem(document.getElementById("v"));
-  }, []);
+  //   useEffect(() => {
+  //     setVideoElem(document.getElementById("v"));
+  //   }, []);
 
   const createQRCode = async () => {
     const opts = {
@@ -27,6 +28,9 @@ const CreateQR = () => {
       .then((url) => {
         console.log(url);
         setQrUrl(url);
+        // var img = document.getElementById("image");
+        // console.log(img);
+        // img.src = url;
       })
       .catch((err) => {
         console.error(err);
@@ -56,8 +60,8 @@ const CreateQR = () => {
     // simple strings. This old api will be removed in the next major release, by which point the options object is then
     // also not required anymore to enable the new api.
     const qrScanner = new QrScanner(
-      videoElem,
-      (result) => console.log("decoded qr code:", result)
+      document.getElementById("v"),
+      (result) => console.log("decoded qr code:", setScanResult(result))
       // No options provided. This will use the old api and is deprecated in the current version until next major version.
     );
     qrScanner.start();
@@ -70,7 +74,10 @@ const CreateQR = () => {
     <div>
       <p className="text-center mt">CreateQR</p>
       <button onClick={createQRCode}>CREATE QR</button>
+      {qrUrl && <img src={qrUrl} />}
       {qrUrl && <button onClick={scanneQR}>SCAN</button>}
+      {scanResult && <p>{scanResult}</p>}
+
       <video id="v"></video>
     </div>
   );
