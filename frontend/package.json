@@ -9,7 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@biconomy/core-types": "^0.0.4",
+    "@biconomy/smart-account": "^0.0.4",
+    "@lifi/widget": "^1.26.4",
     "@metamask/browser-passworder": "^4.0.2",
+    "@pushprotocol/restapi": "^0.2.2",
     "@rainbow-me/rainbowkit": "^0.8.0",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",

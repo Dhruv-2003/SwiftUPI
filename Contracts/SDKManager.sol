@@ -25,31 +25,37 @@ contract SDKManager is Ownable {
     function createUser(
         address SCWAddress,
         string memory _swiftAlias,
-        string memory _name,
-        string memory _qrCode
+        string memory merchantName,
+        string memory _qrCode,
+        string memory _token
     ) public {
         require(SCWAddress != address(0), "Smart Contract Wallet is not Valid");
-        User _user = User(msg.sender, SCWAddress, _swiftAlias, _name, _qrCode);
+        Manager memory _manager = Manager(
+            msg.sender,
+            SCWAddress,
+            _swiftAlias,
+            merchantName,
+            _qrCode,
+            _token
+        );
 
-        userProfiles[msg.sender] = _user;
-        swiftIds[_swiftAlias] = _user;
-
-        emit UserCreated(msg.sender, _swiftAlias, _name);
+        managers[msg.sender] = _manager;
+        swiftIds[_swiftAlias] = _manager;
     }
 
     function addAuthToken(address managerAddress, string memory _token) public {
-        require(_token, "not a valid token ");
-        Manager _manager = managers[managerAddress];
+        Manager storage _manager = managers[managerAddress];
         _manager.authToken = _token;
     }
 
-    function fetchUser(address user) public returns (User storage) {
-        return userProfiles[user];
+    function fetchUser(address user) public view returns (Manager memory) {
+        return managers[user];
     }
 
-    function fetchUserByAlias(string _swiftAlias)
+    function fetchUserByAlias(string memory _swiftAlias)
         public
-        returns (User storage)
+        view
+        returns (Manager memory)
     {
         return swiftIds[_swiftAlias];
     }

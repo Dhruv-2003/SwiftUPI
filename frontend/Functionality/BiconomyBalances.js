@@ -1,8 +1,6 @@
-import { BalancesDto } from "@biconomy/node-client";
 import { ChainId } from "@biconomy/core-types";
 
 // npm install @biconomy/core-types
-// npm install @biconomy/node-client
 
 import React from "react";
 

@@ -3,6 +3,7 @@ import React from "react";
 ///https://github.com/bcnmy/token-list/blob/master/biconomy.tokenlist.json
 
 ///https://biconomy.gitbook.io/sdk/sdk-reference/sending-transactions/gasless-transactions/sending-erc-20-tokens
+
 const BiconomySendTransaction = () => {
   const erc20Interface = new ethers.utils.Interface([
     "function transfer(address _to, uint256 _value)",
@@ -29,7 +30,11 @@ const BiconomySendTransaction = () => {
     }
   };
 
-  return (<div><button>Send Transaction</button></div>);
+  return (
+    <div>
+      <button>Send Transaction</button>
+    </div>
+  );
 };
 
 export default BiconomySendTransaction;
