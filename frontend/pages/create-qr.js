@@ -4,7 +4,7 @@ import QrScanner from "qr-scanner"; // if installed via package and bundling wit
 
 const CreateQR = () => {
   const [qrUrl, setQrUrl] = useState();
-  const [scanResult, setScanResult] = useState();
+  const [scanResult, setScanResult] = useState("DONEEE");
 
   useEffect(() => {
     const qrScanner = new QrScanner(document.getElementById("v"), (result) =>
@@ -59,8 +59,8 @@ const CreateQR = () => {
       {/* <p className="text-center mt">CreateQR</p>
       <button onClick={createQRCode}>CREATE QR</button>
       {qrUrl && <img src={qrUrl} />}
-      {qrUrl && <button onClick={scanneQR}>SCAN</button>}
-      {scanResult && <p>{scanResult}</p>} */}
+      {qrUrl && <button onClick={scanneQR}>SCAN</button>} */}
+      {scanResult && <p>{scanResult}</p>}
 
       <video id="v"></video>
     </div>
