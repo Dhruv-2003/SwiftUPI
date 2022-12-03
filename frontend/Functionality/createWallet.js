@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // const { strict: assert } = require("assert");
 // const passworder = require("browser-passworder");
 import { ethers } from "ethers";
@@ -6,26 +6,34 @@ import { ethers } from "ethers";
 import { encrypt, decrypt } from "@metamask/browser-passworder";
 
 const CreatePK = () => {
-  let randomWallet = ethers.Wallet.createRandom();
+  const [password, setPassword] = useState("hunter55");
 
-  console.log(randomWallet);
-  console.log(randomWallet._isSigner);
+  // console.log(randomWallet);
 
   const createPk = () => {
-    const secrets = { coolStuff: "all", ssn: "livin large" };
-    const password = "hunter55";
+    // const secrets = { coolStuff: "all", ssn: "livin large" };
+    // const password = "";
+    let randomWallet = ethers.Wallet.createRandom();
+    console.log(randomWallet._signingKey());
 
-    encrypt(password, secrets)
+    console.log(randomWallet._signingKey().privateKey);
+
+    encrypt(password, randomWallet._signingKey().privateKey)
       .then(function (blob) {
         // return passworder.decrypt(password, blob);
+        console.log("BLOB", blob);
+        console.log(typeof blob);
+        localStorage.setItem("wallet", blob);
         return decrypt(password, blob);
       })
       .then(function (result) {
         // assert.deepEqual(result, secrets);
         console.log(result);
-        console.log(secrets);
+
+        // console.log(secrets);
       });
   };
+
   //   async function encryptMessage(message, password) {
   //     const encoder = new TextEncoder();
   //     const encodedPlaintext = encoder.encode(message);
@@ -102,10 +110,28 @@ const CreatePK = () => {
   //     return new TextDecoder().decode(plaintext);
   //   }
 
+  const getWallet = () => {
+    console.log("AAAAAAAaaa", JSON.parse(localStorage.getItem("wallet")));
+    decrypt(password, localStorage.getItem("wallet"))
+      .then((res) => {
+        console.log("DECRYPT");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+  };
+
   return (
     <div>
       <p className="text-center mt-8">Private Key</p>
       <button onClick={createPk}>CREATE PK</button>
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button onClick={getWallet}>GET WALLET</button>
     </div>
   );
 };
