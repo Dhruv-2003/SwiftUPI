@@ -33,7 +33,7 @@ const BiconomySCW = () => {
         ],
       };
 
-      const walletProvider = new ethers.providers.Web3Provider(provider);
+      // const walletProvider = new ethers.providers.Web3Provider(provider);
 
       let smartAccount = new SmartAccount(walletProvider, options);
       smartAccount = await smartAccount.init();
