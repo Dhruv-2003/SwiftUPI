@@ -1,11 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import landing from "../assets/landing.png";
-import avatar from "../assets/avatar.png";
-import scannpay from "../assets/scannpay.png";
-import Link from "next/link";
-
+import Head from 'next/head'
+import Image from 'next/image'
+import styles from '../styles/Home.module.css'
+    
 export default function Home() {
   return (
     <div className={styles.container}>

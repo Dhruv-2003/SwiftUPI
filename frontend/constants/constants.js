@@ -1,6 +1,7 @@
 export const PaymentRequests_Address = "";
 export const ProfileManager_Address = "";
 export const SDKManager_Address = "";
+export const USDC_Address = "0x321507ea5218ee046ac0c94c1749c487b7236051";
 
 export const PaymentRequests_ABI = [
   {
@@ -955,6 +956,93 @@ export const SDKManager_ABI = [
     name: "transferOwnership",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+];
+
+export const USDC_ABI = [
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "implementationContract",
+        type: "address",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "address",
+        name: "previousAdmin",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "newAdmin",
+        type: "address",
+      },
+    ],
+    name: "AdminChanged",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "address",
+        name: "implementation",
+        type: "address",
+      },
+    ],
+    name: "Upgraded",
+    type: "event",
+  },
+  { stateMutability: "payable", type: "fallback" },
+  {
+    inputs: [],
+    name: "admin",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "newAdmin", type: "address" }],
+    name: "changeAdmin",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "implementation",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "newImplementation", type: "address" },
+    ],
+    name: "upgradeTo",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      { internalType: "address", name: "newImplementation", type: "address" },
+      { internalType: "bytes", name: "data", type: "bytes" },
+    ],
+    name: "upgradeToAndCall",
+    outputs: [],
+    stateMutability: "payable",
     type: "function",
   },
 ];
