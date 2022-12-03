@@ -19,7 +19,7 @@ export default function Uregister() {
         type="text"
         className="mt-3 bg-gray-50 px-4 md:mx-auto border text-sm w-72 mx-auto border-gray-300 text-gray-900 rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="enter name..."
-      />
+      />    
       <label className="mt-4 px-10 pt-4 md:mx-auto" htmlFor="">
         UserID
       </label>

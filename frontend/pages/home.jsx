@@ -49,7 +49,7 @@ export default function Home() {
               </div>
             </Link>
 
-            <Link href={"/create-qr"}>
+            <Link href={"/payid"}>
               <div className=" hover:scale-105 cursor-pointer transition ease-in-out">
                 <div className=" h-[60px] w-[60px] bg-purple-700 max-w-[60px] mx-auto rounded-xl   ">
                   <div className="text-4xl pt-3">👱🏻‍♂️</div>
@@ -60,7 +60,7 @@ export default function Home() {
               </div>
             </Link>
 
-            <Link href={"/create-qr"}>
+            <Link href={"/dashboard"}>
               <div className=" hover:scale-105 cursor-pointer transition ease-in-out">
                 <div className=" h-[60px] w-[60px] bg-purple-700 max-w-[60px] mx-auto rounded-xl   ">
                   <div className="text-4xl pt-3">💸</div>
