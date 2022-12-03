@@ -4,8 +4,8 @@ import GenerateQR from "../components/GenerateQR";
 export default function gateway() {
   return (
     <div className="flex flex-col text-white">
-      <div className=" w-full bg-cyan-500 text-black">
-        <h1 className=" w-full py-6 px-4 font-bold text-2xl">Merchant Name</h1>
+      <div className=" w-full bg-[#5c80ff] text-black">
+        <h1 className=" w-full py-6 px-4 font-bold text-2xl">SwiftUPI</h1>
       </div>
 
       <div className=" flex flex-col items-start justify-center mt-6 py-16 px-4">
