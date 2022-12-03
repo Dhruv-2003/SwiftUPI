@@ -125,14 +125,9 @@ export default function Uregister() {
       <input
         type="text"
         className="mt-3 bg-gray-50 px-4 md:mx-auto border text-sm w-72 mx-auto border-gray-300 text-gray-900 rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-<<<<<<< HEAD
         placeholder="user name ..."
         onChange={(e) => setUserName(e.target.value)}
       />
-=======
-        placeholder="enter name..."
-      />    
->>>>>>> 959ba2524eda5c416f6ee5c8b2b196554bc2c8e6
       <label className="mt-4 px-10 pt-4 md:mx-auto" htmlFor="">
         UserID
       </label>
