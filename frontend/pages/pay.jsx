@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 export default function Pay() {
   return (
     <div className=" text-white flex flex-col px-4 py-6 text-center">
-        <h1 className=" text-3xl mb-0 font-bold underline">SwiftUPI</h1>
+      <h1 className=" text-3xl mb-0 font-bold underline">SwiftUPI</h1>
       <div className="bg-purple-700 max-w-[200px] mx-auto rounded-xl mt-10   ">
         <Image src={avatar} />
       </div>
