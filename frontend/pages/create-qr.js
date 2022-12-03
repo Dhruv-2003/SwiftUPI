@@ -6,6 +6,13 @@ const CreateQR = () => {
   const [qrUrl, setQrUrl] = useState();
   const [scanResult, setScanResult] = useState();
 
+  useEffect(() => {
+    const qrScanner = new QrScanner(document.getElementById("v"), (result) =>
+      console.log("decoded qr code:", setScanResult(result))
+    );
+    qrScanner.start();
+  }, []);
+
   const createQRCode = async () => {
     const opts = {
       errorCorrectionLevel: "H",
@@ -49,11 +56,11 @@ const CreateQR = () => {
   };
   return (
     <div>
-      <p className="text-center mt">CreateQR</p>
+      {/* <p className="text-center mt">CreateQR</p>
       <button onClick={createQRCode}>CREATE QR</button>
       {qrUrl && <img src={qrUrl} />}
       {qrUrl && <button onClick={scanneQR}>SCAN</button>}
-      {scanResult && <p>{scanResult}</p>}
+      {scanResult && <p>{scanResult}</p>} */}
 
       <video id="v"></video>
     </div>
