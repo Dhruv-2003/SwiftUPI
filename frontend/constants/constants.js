@@ -1,6 +1,8 @@
-export const PaymentRequests_Address = "";
-export const ProfileManager_Address = "";
-export const SDKManager_Address = "";
+export const PaymentRequests_Address =
+  "0x0D80E4EE912e12467EC87dfb930A8E4c3B4bB13C";
+export const ProfileManager_Address =
+  "0x331d1eB264EC5bd27D89B2638018B262b2414C98";
+export const SDKManager_Address = "0x331d1eB264EC5bd27D89B2638018B262b2414C98";
 export const USDC_Address = "0x321507ea5218ee046ac0c94c1749c487b7236051";
 
 export const PaymentRequests_ABI = [
@@ -161,6 +163,60 @@ export const PaymentRequests_ABI = [
       },
     ],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_requestId",
+        type: "uint256",
+      },
+    ],
+    name: "getRequest",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "requestCreator",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+          {
+            internalType: "string",
+            name: "detailsURI",
+            type: "string",
+          },
+          {
+            internalType: "enum requestHandler.payState",
+            name: "_state",
+            type: "uint8",
+          },
+        ],
+        internalType: "struct requestHandler.PaymentRequest",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getTotalRequests",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "_total",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
