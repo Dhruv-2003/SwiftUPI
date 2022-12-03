@@ -21,6 +21,8 @@ contract profileManger is Ownable {
         string name;
     }
 
+    event UserCreated(address _userAddres, string _swiftId, string _name);
+
     /// mapping userAddress --> User
     mapping(address => User) public userProfiles;
 
@@ -30,9 +32,42 @@ contract profileManger is Ownable {
     /// check for ENS or Lens and allow them to add that directly
 
     /// issue an SwiftAlias and add user to the data
-    function createUser() public {}
+    function createUser(
+        address SCWAddress,
+        string memory _swiftAlias,
+        string memory _ens,
+        string memory _lens,
+        string memory _name
+    ) public {
+        require(SCWAddress != address(0), "Smart Contract Wallet is not Valid");
+        User _user = User(
+            msg.sender,
+            SCWAddress,
+            _swiftAlias,
+            _ens,
+            _lens,
+            _name
+        );
 
-    function createSwiftID() internal {}
+        userProfiles[msg.sender] = _user;
+        swiftIds[_swiftAlias] = _user;
 
-    function fetchUser() public {}
+        emit UserCreated(msg.sender, _swiftAlias, _name);
+    }
+
+    function updateSwiftAlias(string _newAlias) public {
+        User _user = userProfiles[msg.sender];
+        _user.swiftId = _newAlias;
+    }
+
+    function fetchUser(address user) public returns (User storage) {
+        return userProfiles[user];
+    }
+
+    function fetchUserByAlias(string _swiftAlias)
+        public
+        returns (User storage)
+    {
+        return swiftIds[_swiftAlias];
+    }
 }
