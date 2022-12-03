@@ -120,13 +120,14 @@ contract requestHandler is Ownable {
     }
 
     //// Create Request for the p-m -- CASE 2 Solved
-    function createRequest(uint256 _amount, string detailsURI)
-        public
-        returns (uint256 _id)
-    {
+    function createRequest(
+        address creator,
+        uint256 _amount,
+        string detailsURI
+    ) public returns (uint256 _id) {
         uint256 _requestId = totalRequests;
         requests[_requestId] = PaymentRequest(
-            msg.sender,
+            creator,
             _amount,
             payState.intiated,
             detailsURI

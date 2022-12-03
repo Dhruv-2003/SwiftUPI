@@ -1,8 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.10;
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 //Create corporate profiles , and save the data
 //Issue Account abstraction
 //Issue Authentication tokens , for each profile registered
-//Then allow to create requests via API routes , maybe authenticated with the tokens issued
-//Either show Qr codes to scan and pay , or send request to an alias
+
+contract SDKManager is Ownable {
+    struct User {
+        address userAddress;
+        address SCW;
+        string swiftId;
+        string MerchantName;
+        string qrCodeCId;
+    }
+}
