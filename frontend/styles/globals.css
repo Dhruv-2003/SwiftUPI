@@ -21,3 +21,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+button {
+  border: 1px solid red;
+  padding: 10px;
+  text-align: center;
+}
