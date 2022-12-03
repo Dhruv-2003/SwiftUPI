@@ -12,9 +12,8 @@ export default function Home() {
       </Head>
 
       <div>
-        
+        <p>HOMEEEEEEEEEE</p>
       </div>
-
     </div>
-  )
+  );
 }

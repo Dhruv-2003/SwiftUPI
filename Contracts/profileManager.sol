@@ -19,6 +19,7 @@ contract profileManger is Ownable {
         string ens;
         string lens;
         string name;
+        string qrCodeCId;
     }
 
     event UserCreated(address _userAddres, string _swiftId, string _name);
@@ -37,7 +38,8 @@ contract profileManger is Ownable {
         string memory _swiftAlias,
         string memory _ens,
         string memory _lens,
-        string memory _name
+        string memory _name,
+        string memory _qrCode
     ) public {
         require(SCWAddress != address(0), "Smart Contract Wallet is not Valid");
         User _user = User(
@@ -46,7 +48,8 @@ contract profileManger is Ownable {
             _swiftAlias,
             _ens,
             _lens,
-            _name
+            _name,
+            _qrCode
         );
 
         userProfiles[msg.sender] = _user;
