@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "dotenv": "^16.0.3",
+    "@metamask/browser-passworder": "^4.0.2",
     "@rainbow-me/rainbowkit": "^0.8.0",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.6",
     "ethers": "^5.7.2",
