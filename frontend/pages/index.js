@@ -18,7 +18,7 @@ export default function Home() {
         <h1 className="text-center mx-auto italic mt-3 underline">
           &#40;Unified Crypto Payment Interface&#41;
         </h1>
-        <Image alt="image" src={landing} />
+        <Image className="mx-auto" alt="image" src={landing} />
         <h1 className="text-xl text-center mt-6 font-bold">
           Experience UPI on chain with the power of Crypto
         </h1>

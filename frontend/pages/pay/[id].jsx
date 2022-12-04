@@ -1,15 +1,20 @@
 import React from "react";
 import Image from "next/image";
-import avatar from "../assets/avatar.png";
-import styles from "../styles/Home.module.css";
+import avatar from "../../assets/avatar.png";
+import styles from "../../styles/Home.module.css";
 import { Button, Label, Modal, TextInput } from "flowbite-react";
 import { Fragment, useRef, useState, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import Lifi from "../Functionality/Lifi";
+import Lifi from "../../Functionality/Lifi";
+import { useRouter } from "next/router";
 
 export default function Pay() {
   const [togglePayComponent, setTogglePayComponent] = React.useState(false);
   const [pin, setPin] = useState("");
+
+  const router = useRouter()
+  const {id} = router.query
+  // console.log(router)
 
   const cancelButtonRef = useRef(null);
   return (
@@ -19,7 +24,7 @@ export default function Pay() {
         <Image src={avatar} alt="avatar" />
       </div>
       <span className="mt-12 text-xl font-bold">Kushagara Sarathe</span>
-      <span className=" text-lg font-bold">kushagra@swift</span>
+      <span className=" text-lg font-bold">{id}</span>
 
       <span className=" mt-12">You are paying </span>
       <span className="my-5  text-2xl font-bold">$ 100</span>
