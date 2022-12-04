@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import sampleqr from "../assets/sampleqr.webp";
 import Image from "next/image";
 
@@ -6,6 +6,24 @@ import createQRCode from "/helper.js";
 
 export default function GenerateQR() {
   const [qrUrl, setQrUrl] = useState();
+
+  useEffect(() => {
+    let rid
+    (async () => {
+      rid = await fetch('/api/createRequest' , {
+        method: "POST",
+        body: JSON.stringify({
+          creator: "0x",
+          amount: 10,
+          detailsURI: ""
+        })()
+      })
+    })
+    console.log(rid)
+
+  }, [])
+  
+
   return (
     <div className=" w-full">
       <div className="relative mb-6 w-full flex justify-around items-start rounded-md border-gray-300 border my-4 py-6 px-4">
