@@ -22,6 +22,11 @@ export default function Home() {
         <h1 className="text-xl text-center mt-6 font-bold">
           Experience UPI on chain with the power of Crypto
         </h1>
+        <Link className="w-11/12" href="/home" passHref>
+          <button type="button" class={`w-11/12  text-sm mt-0 ${styles.btn}`}>
+            Home
+          </button>
+        </Link>
         {/* <p className="text-center mt-5">Defination here</p> */}
       </div>
 
@@ -33,26 +38,18 @@ export default function Home() {
 
       {/* render to ask user registeration */}
 
-      <div className=" text-white flex flex-col px-4 py-6 text-center">
+      <div className=" text-white w-full flex flex-col px-4 py-6 text-center">
         <h2 className=" text-white text-center text-lg mt-2  mb-0 font-bold underline ">
           Register Wallet
         </h2>
-        <div className="mt-3 flex flex-col items-center justify-around text-xl font-bold">
-          <Link href="/home" passHref>
-            <button
-              type="button"
-              class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            >
-              Home
-            </button>
-          </Link>
-          <Link href="/mregister" passHref>
-            <button className={`  text-sm mt-0 ${styles.btn}`}>Register</button>
+        <div className="mt-3 flex w-full flex-col items-center justify-around text-xl font-bold">
+          <Link className="w-11/12" href="/mregister" passHref>
+            <button className={`  text-sm mt-0 ${styles.btn}`}>Register Merchant</button>
           </Link>
           <span className="italic text-md font-normal">or</span>
-          <Link href="/uregister" passHref>
-            <button className={`  text-sm mt-0 ${styles.btn}`}>
-              Create a User Wallet
+          <Link className="w-11/12" href="/uregister" passHref>
+            <button className={`w-11/12  text-sm mt-0 ${styles.btn}`}>
+              Register User
             </button>
           </Link>
         </div>
