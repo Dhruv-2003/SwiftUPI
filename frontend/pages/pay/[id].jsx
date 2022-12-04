@@ -13,11 +13,13 @@ import {
   RPC_URL,
   SDKManager_ABI,
   SDKManager_Address,
+  USDC_ABI,
+  USDC_Address,
 } from "../../constants/constants";
 import { ethers } from "ethers";
 export default function Pay() {
   const [togglePayComponent, setTogglePayComponent] = React.useState(false);
-  const [pin, setPin] = useState("");
+  const [pin, setPin] = useState();
   const [request, setRequest] = useState();
 
   const router = useRouter();
@@ -75,9 +77,11 @@ export default function Pay() {
     }
   };
 
-  const fetchCurrentUser = async () => {
+  const fetchCurrentUser = async (pin) => {
     try {
       const pk = await decrypt(pin, localStorage.getItem("wallet"));
+      const privateKey = pk.slice(2);
+      getSmartContractWallet(privateKey);
     } catch (error) {
       console.log(error);
     }
@@ -108,17 +112,18 @@ export default function Pay() {
         ],
       };
 
-      // const walletProvider = wallet.provider;
-
       let smartAccount = new SmartAccount(providerwallet, option);
       smartAccount = await smartAccount.init();
-      setsmartContractWallet(smartAccount);
+      console.log(smartAccount);
+
+      const recieverSCW = "0x4c380c1f8B6C5587210a5DeeEeb9eBB402B88Ef3";
+      pay(receiverSCW, 10, smartAccount);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const pay = async () => {
+  const pay = async (_recieverSCW, amount, smartContractWallet) => {
     try {
       const _amount = amount * (10 ^ 6);
       const erc20Interface = new ethers.utils.Interface([
@@ -193,7 +198,9 @@ export default function Pay() {
           </span>
         </span>
 
-        <button className={styles.btn}>Pay Now</button>
+        <button className={styles.btn} onClick={() => pay(pin)}>
+          Pay Now
+        </button>
 
         <Button
           onClick={() => {
