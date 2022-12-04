@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.4",
     "@lifi/widget": "^1.26.4",
     "@metamask/browser-passworder": "^4.0.2",
     "@rainbow-me/rainbowkit": "^0.8.0",

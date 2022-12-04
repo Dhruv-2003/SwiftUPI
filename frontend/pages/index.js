@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
-import landing from '../assets/2.png'
+import landing from "../assets/2.png";
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
         <h1 className="text-center mx-auto italic mt-3 underline">
           &#40;Unified Crypto Payment Interface&#41;
         </h1>
-        <Image alt="image" src={landing}/>
+        <Image alt="image" src={landing} />
         <h1 className="text-xl text-center mt-6 font-bold">
           Experience UPI on chain with the power of Crypto
         </h1>
@@ -38,10 +38,16 @@ export default function Home() {
           Register Wallet
         </h2>
         <div className="mt-3 flex flex-col items-center justify-around text-xl font-bold">
-          <Link href="/mregister" passHref>
-            <button className={`  text-sm mt-0 ${styles.btn}`}>
-              Register
+          <Link href="/home" passHref>
+            <button
+              type="button"
+              class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            >
+              Home
             </button>
+          </Link>
+          <Link href="/mregister" passHref>
+            <button className={`  text-sm mt-0 ${styles.btn}`}>Register</button>
           </Link>
           <span className="italic text-md font-normal">or</span>
           <Link href="/uregister" passHref>
