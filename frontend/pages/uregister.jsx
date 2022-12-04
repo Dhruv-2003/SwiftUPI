@@ -23,6 +23,7 @@ export default function Uregister() {
       let randomWallet = ethers.Wallet.createRandom();
       console.log(randomWallet);
       console.log(randomWallet._signingKey().privateKey);
+      localStorage.setItem("walletAddress", randomWallet.address);
       encrypt(password, randomWallet._signingKey().privateKey).then(function (
         blob
       ) {

@@ -21,6 +21,7 @@ export default function Mregister() {
       let randomWallet = ethers.Wallet.createRandom();
       console.log(randomWallet);
       console.log(randomWallet._signingKey().privateKey);
+      localStorage.setItem("walletAddress", randomWallet.address);
       encrypt(password, randomWallet._signingKey().privateKey).then(function (
         blob
       ) {
@@ -154,7 +155,7 @@ export default function Mregister() {
 
       <div className="w-[85%] mx-auto mt-5 md:w-[27%]">
         <button
-          onClick={() => addUser("0x4c380c1f8b6c5587210a5deeeeb9ebb402b88ef3")}
+          onClick={() => createWallet(pin)}
           className={`${styles.btn} text-xs`}
         >
           Register

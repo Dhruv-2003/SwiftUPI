@@ -2,8 +2,13 @@ import React from "react";
 import Image from "next/image";
 import avatar from "../assets/avatar.png";
 import styles from "../styles/Home.module.css";
-
+import {
+  PaymentRequests_ABI,
+  PaymentRequests_Address,
+} from "../constants/constants";
 export default function Pay() {
+  /// recive the Id from Query link or else
+  const [reqId, setReqId] = useState();
   return (
     <div className=" text-white flex flex-col px-4 py-6 text-center">
       <h1 className=" text-3xl mb-0 font-bold underline">SwiftUPI</h1>
