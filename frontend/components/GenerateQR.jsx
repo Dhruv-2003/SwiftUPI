@@ -12,42 +12,21 @@ export default function GenerateQR() {
   const [qrUrl, setQrUrl] = useState();
 
   useEffect(() => {
-    let rid;
-    // (async () => {
-    //   rid = await fetch("/api/createRequest", {
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //       creator: "0x",
-    //       amount: 60,
-    //       detailsURI: "",
-    //     }),
-    //   });
-    // })().then((r) => {
-    //   console.log(r);
-    //   // console.log(rid);
-    // });
+    let rid
+    (async () => {
+      rid = await fetch('/api/createRequest' , {
+        method: "POST",
+        body: JSON.stringify({
+          creator: "0x",
+          amount: 10,
+          detailsURI: ""
+        })()
+      })
+    })
+    console.log(rid)
 
-    fetch("/api/createRequest", {
-      method: "POST",
-      body: JSON.stringify({
-        creator: "0x",
-        amount: 60,
-        detailsURI: "",
-      }),
-    }).then((res) => {
-      console.log(res);
-    });
-  }, []);
-
-  const createQrCode = () => {
-    console.log("AAAAAAAAAAAAAAAAAAA");
-    QRCode.toDataURL("rid").then((url) => {
-      console.log(url);
-      setQrUrl(url);
-    });
-  };
-
-  console.log({ qrUrl });
+  }, [])
+  
 
   return (
     <div className="w-full">

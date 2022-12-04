@@ -15,9 +15,7 @@ require("dotenv").config();
 
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const RPC_URL = process.env.RPC_URL;
-const provider = new ethers.providers.JsonRpcProvider(
-  `https://rpc-mumbai.matic.today`
-);
+const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
 const signer = new ethers.Wallet(PRIVATE_KEY, provider);
 
 const Request_contract = new ethers.Contract(
