@@ -9,6 +9,7 @@ import Lifi from "../Functionality/Lifi";
 
 export default function Pay() {
   const [togglePayComponent, setTogglePayComponent] = React.useState(false);
+  const [pin, setPin] = useState("");
 
   const cancelButtonRef = useRef(null);
   return (
@@ -26,8 +27,26 @@ export default function Pay() {
       <input
         type="text"
         id="input-group-1"
-        className="mt-6 bg-gray-50 px-4 border w-11/12 mx-auto border-gray-900 text-gray-300 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="mt-3 bg-gray-50 px-4 border w-11/12 mx-auto border-gray-900 text-gray-300 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Note..."
+      />
+
+      <label className="mt-4 px-10 pt-4 md:mx-auto" htmlFor="">
+        Enter CPIN{" "}
+        <span className=" text-xs italic">
+          &#40; 6 Digit Secret Crypto PIN &#41;
+        </span>
+      </label>
+      <input
+        onChange={(e) => setPin(e.target.value)}
+        value={pin}
+        type="password"
+        pattern="[0-9]*"
+        inputmode="numeric"
+        minlength="6"
+        maxlength="6"
+        className="mt-3 bg-gray-50 px-4 border w-11/12 mx-auto md:mx-auto border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="secret CPIN..."
       />
 
       <div className=" flex flex-col  mt-8">
@@ -88,24 +107,22 @@ export default function Pay() {
                             as="h3"
                             className="text-3xl mx-auto mt-0 mb-2 font-semibold leading-6 mr-auto pl-4 text-gray-100 px-2"
                           >
-                            Pay{" "}
-                            
-                            with LiFi
+                            Pay with LiFi
                           </Dialog.Title>
 
                           <div className={`mt-4`}>
                             <div className="my-2 text-center text-lg text-white">
                               <Lifi />
                               <button
-                              onClick={() => {
-                                setTogglePayComponent(!togglePayComponent);
-                              }}
-                              ref={cancelButtonRef}
-                              type="button"
-                              className={` mt-0 inline-flex  rounded-md border border-transparent bg-white text-black px-4 py-2 text-base font-medium shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm`}
-                            >
-                              Cancel
-                            </button>
+                                onClick={() => {
+                                  setTogglePayComponent(!togglePayComponent);
+                                }}
+                                ref={cancelButtonRef}
+                                type="button"
+                                className={` mt-0 inline-flex  rounded-md border border-transparent bg-white text-black px-4 py-2 text-base font-medium shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm`}
+                              >
+                                Cancel
+                              </button>
                             </div>
                           </div>
                         </div>
