@@ -146,9 +146,9 @@ export default function Mregister() {
         value={pin}
         type="password"
         pattern="[0-9]*"
-        inputmode="numeric"
+        inputMode="numeric"
         minlength="6"
-        maxlength="6"
+        maxLength="6"
         className="mt-3 bg-gray-50 px-4 border w-72 mx-auto md:mx-auto border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="secret CPIN..."
       />
