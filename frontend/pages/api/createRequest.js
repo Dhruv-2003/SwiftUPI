@@ -51,6 +51,7 @@ export default async function createRequest(req, res) {
     console.log(requestId);
     res.json(requestId);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 

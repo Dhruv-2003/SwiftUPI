@@ -33,6 +33,7 @@ const CreateQR = () => {
     QRCode.toDataURL("I am a pony!", opts)
       .then((url) => {
         console.log(url);
+        return url;
         setQrUrl(url);
         // var img = document.getElementById("image");
         // console.log(img);
