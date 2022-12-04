@@ -30,10 +30,33 @@ button {
 }
 
 video {
-  width: 100vw;
+  /* width: 100vw;
   height: 100vh;
   object-fit: cover;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 0; */
+}
+
+.overlay {
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.overlay h2 {
+  background: #000 none repeat scroll 0 0;
+  color: tan;
+  font-weight: 600;
+  margin: 2rem 3rem 0;
+  mix-blend-mode: overlay;
+  padding: 5px 15px;
+  text-align: center;
 }

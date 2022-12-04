@@ -28,6 +28,7 @@ export const createWallet = (password) => {
 export const getWallet = (password) => {
   decrypt(password, localStorage.getItem("wallet"))
     .then((res) => {
+      console.log(res);
       return res;
     })
     .catch((err) => {

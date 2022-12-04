@@ -37,6 +37,7 @@ const BiconomySCW = () => {
 
       let smartAccount = new SmartAccount(walletProvider, options);
       smartAccount = await smartAccount.init();
+      console.log(smartA);
 
       const address = smartAccount.address;
       console.log("address", address);

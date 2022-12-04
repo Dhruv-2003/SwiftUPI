@@ -1,9 +1,109 @@
 import React, { useState } from "react";
 import styles from "../styles/Home.module.css";
-import { createWallet } from "../helper";
+import { createWallet, getWallet } from "../helper";
+import { ethers } from "ethers";
+import { ChainId } from "@biconomy/core-types";
+import { encrypt, decrypt } from "@metamask/browser-passworder";
+import HDWalletProvider from "@truffle/hdwallet-provider";
+import { SDKManager_ABI, SDKManager_Address } from "../constants/constants";
+import SmartAccount from "@biconomy/smart-account";
 
 export default function Mregister() {
   const [pin, setPin] = useState("");
+  const [merchantName, setMerchantName] = useState("");
+  const [swiftAlias, setSwiftAlias] = useState("");
+
+  const RPC_URL =
+    "https://flashy-cold-choice.matic-testnet.discover.quiknode.pro/a27666d2e485f614bdb3ac5b4ed4f59c067a8d28/";
+
+  const createWallet = (password) => {
+    try {
+      let randomWallet = ethers.Wallet.createRandom();
+      console.log(randomWallet);
+      console.log(randomWallet._signingKey().privateKey);
+      encrypt(password, randomWallet._signingKey().privateKey).then(function (
+        blob
+      ) {
+        localStorage.setItem("wallet", blob);
+        createSCW();
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const createSCW = async () => {
+    try {
+      const pk = await decrypt(pin, localStorage.getItem("wallet"));
+      const privateKey = pk.slice(2);
+      console.log(privateKey, RPC_URL);
+
+      const providerWithSigner = new HDWalletProvider(privateKey, RPC_URL);
+      const providerwallet = new ethers.providers.Web3Provider(
+        providerWithSigner
+      );
+      let options = {
+        activeNetworkId: ChainId.POLYGON_MUMBAI,
+        supportedNetworksIds: [
+          ChainId.GOERLI,
+          ChainId.POLYGON_MAINNET,
+          ChainId.POLYGON_MUMBAI,
+        ],
+        networkConfig: [
+          {
+            chainId: ChainId.POLYGON_MUMBAI,
+            // Optional dappAPIKey (only required if you're using Gasless)
+            dappAPIKey: "59fRCMXvk.8a1652f0-b522-4ea7-b296-98628499aee3",
+            // if need to override Rpc you can add providerUrl:
+            // providerUrl: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+          },
+        ],
+      };
+
+      // const walletProvider = wallet.provider;
+
+      let smartAccount = new SmartAccount(providerwallet, options);
+      smartAccount = await smartAccount.init();
+      let smartAccountInfo = await smartAccount.getSmartAccountState();
+      console.log("smartAccountInfo", smartAccountInfo);
+      // setSmartConnectWallet(smartAccount);
+      const address = smartAccountInfo.address;
+      console.log("address", address);
+      addUser(address);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addUser = async (_address) => {
+    try {
+      console.log("Adding user to the contract");
+      const privateKey = await decrypt(pin, localStorage.getItem("wallet"));
+
+      const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
+      const wallet = new ethers.Wallet(privateKey, provider);
+
+      const SDKManager_contract = new ethers.Contract(
+        SDKManager_Address,
+        SDKManager_ABI,
+        wallet
+      );
+
+      const tx = await SDKManager_contract.createUser(
+        _address,
+        swiftAlias,
+        merchantName,
+        "",
+        ""
+      );
+
+      await tx.wait();
+      console.log(tx);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className=" text-white flex flex-col">
       <div className="flex items-end justify-between px-4 border-b pb-3">
@@ -23,6 +123,7 @@ export default function Mregister() {
         type="text"
         className="mt-3 bg-gray-50 px-4 md:mx-auto border text-sm w-72 mx-auto border-gray-300 text-gray-900 rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="enter name..."
+        onChange={(e) => setMerchantName(e.target.value)}
       />
       <label className="mt-4 px-10 pt-4 md:mx-auto" htmlFor="">
         UserID
@@ -30,7 +131,8 @@ export default function Mregister() {
       <input
         type="text"
         className="mt-3 bg-gray-50 px-4 border md:mx-auto text-sm w-72 mx-auto border-gray-300 text-gray-900 rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        placeholder="unique username..."
+        placeholder="example@swiftfi."
+        onChange={(e) => setSwiftAlias(e.target.value)}
       />
       <label className="mt-4 px-10 pt-4 md:mx-auto" htmlFor="">
         Enter CPIN{" "}
@@ -51,7 +153,10 @@ export default function Mregister() {
       />
 
       <div className="w-[85%] mx-auto mt-5 md:w-[27%]">
-        <button onClick={createWallet(pin)} className={`${styles.btn} text-xs`}>
+        <button
+          onClick={() => addUser("0x4c380c1f8b6c5587210a5deeeeb9ebb402b88ef3")}
+          className={`${styles.btn} text-xs`}
+        >
           Register
         </button>
       </div>
