@@ -1,8 +1,10 @@
+import Link from 'next/link';
 import React from 'react'
 import styles from "../styles/Home.module.css";
 
 export default function Payid() {
   const [pin, setPin] = React.useState("");
+  const [id, setId] = React.useState("");
 
   return (
     <div className=" text-white flex flex-col">
@@ -21,14 +23,16 @@ export default function Payid() {
       </label>
       <input
         type="text"
+        onChange={(e) => setId(e.target.value)}
+        value={id}
         className="mt-3 bg-gray-50 px-4 md:mx-auto border text-sm w-72 mx-auto border-gray-300 text-gray-900 rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="enter swift ucpi id..."
       />
 
       <div className="w-[85%] mx-auto mt-5 md:w-[27%]">
-        <button  className={`${styles.btn} text-xs`}>
+        <Link href={`/pay/${id}`}  className={`${styles.btn} text-xs`}>
           Proceed
-        </button>
+        </Link>
       </div>
     </div>
   )

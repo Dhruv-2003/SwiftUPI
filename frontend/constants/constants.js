@@ -5,6 +5,12 @@ export const ProfileManager_Address =
 export const SDKManager_Address = "0x331d1eB264EC5bd27D89B2638018B262b2414C98";
 export const USDC_Address = "0x321507ea5218ee046ac0c94c1749c487b7236051";
 
+export const RPC_URL =
+  "https://flashy-cold-choice.matic-testnet.discover.quiknode.pro/a27666d2e485f614bdb3ac5b4ed4f59c067a8d28/";
+
+export const WEB3STORAGE_TOKEN =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDMxQjM3MjRlN2E2RjgyMTg3NEFEYzMyYjEzZDQwNjM2YkFiMDA0NzEiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NTg0MTc0ODY2ODksIm5hbWUiOiJDYXplIn0.BoGp0mNQc_syBHBZFj6Mb2dTUjAlpLWHd6DwCwFSc_4";
+
 export const PaymentRequests_ABI = [
   {
     anonymous: false,

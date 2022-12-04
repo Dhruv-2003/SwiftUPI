@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.4",
     "@biconomy/core-types": "^0.0.4",
     "@biconomy/smart-account": "^0.0.4",
     "@lifi/widget": "^1.26.4",
