@@ -11,7 +11,7 @@ import { ethers } from "ethers";
 import { ChainId } from "@biconomy/core-types";
 import { user } from "@pushprotocol/restapi";
 import Router from "next/router";
-
+import { createQrCode } from "../components/GenerateQR";
 export default function Uregister() {
   const [pin, setPin] = useState("");
   const [userName, setUserName] = useState("");
@@ -120,9 +120,22 @@ export default function Uregister() {
     }
   };
 
+  const generateQrById = async () => {
+    try {
+      /// take the alias and convert into a Qr code with the library used
+      const qrCodeURL = await createQrCode(swiftAlias);
+      return qrCodeURL;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const addUser = async (_address) => {
     try {
       console.log("Adding user to the contract");
+
+      const qrURL = await generateQrById();
+
       const privateKey = await decrypt(pin, localStorage.getItem("wallet"));
 
       const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
@@ -139,8 +152,8 @@ export default function Uregister() {
         swiftAlias,
         "",
         "",
-        "",
-        ""
+        userName,
+        qrURL
       );
 
       await tx.wait();

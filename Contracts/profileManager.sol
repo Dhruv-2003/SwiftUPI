@@ -19,7 +19,7 @@ contract profileManager is Ownable {
         string ens;
         string lens;
         string name;
-        string qrCodeCId;
+        string qrCodeCID;
     }
 
     event UserCreated(address _userAddres, string _swiftId, string _name);

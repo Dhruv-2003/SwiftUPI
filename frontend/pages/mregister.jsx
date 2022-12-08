@@ -8,6 +8,7 @@ import HDWalletProvider from "@truffle/hdwallet-provider";
 import { SDKManager_ABI, SDKManager_Address } from "../constants/constants";
 import SmartAccount from "@biconomy/smart-account";
 import Router from "next/router";
+import { createQrCode } from "../components/GenerateQR";
 
 export default function Mregister() {
   const [pin, setPin] = useState("");
@@ -50,25 +51,33 @@ export default function Mregister() {
     }
   };
 
-  const createWallet = (password) => {
+  const handleSubmit = () => {
     try {
       if (!walletExsists) {
-        let randomWallet = ethers.Wallet.createRandom();
-        console.log(randomWallet);
-        console.log(randomWallet._signingKey().privateKey);
-        localStorage.setItem("walletAddress", randomWallet.address);
-        encrypt(password, randomWallet._signingKey().privateKey).then(function (
-          blob
-        ) {
-          localStorage.setItem("wallet", blob);
-          createSCW();
-        });
+        createWallet();
       } else if (!userExsists) {
         addUser();
       } else {
         console.log("registeration already complete ");
         Router.push("/Home");
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const createWallet = (password) => {
+    try {
+      let randomWallet = ethers.Wallet.createRandom();
+      console.log(randomWallet);
+      console.log(randomWallet._signingKey().privateKey);
+      localStorage.setItem("walletAddress", randomWallet.address);
+      encrypt(password, randomWallet._signingKey().privateKey).then(function (
+        blob
+      ) {
+        localStorage.setItem("wallet", blob);
+        createSCW();
+      });
     } catch (error) {
       console.log(error);
     }
@@ -117,9 +126,22 @@ export default function Mregister() {
     }
   };
 
+  const generateQrById = async () => {
+    try {
+      /// take the alias and convert into a Qr code with the library used
+      const qrCodeURL = await createQrCode(swiftAlias);
+      return qrCodeURL;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const addUser = async (_address) => {
     try {
       console.log("Adding user to the contract");
+
+      const qrURL = await generateQrById();
+
       const privateKey = await decrypt(pin, localStorage.getItem("wallet"));
 
       const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
@@ -135,7 +157,7 @@ export default function Mregister() {
         _address,
         swiftAlias,
         merchantName,
-        "",
+        qrURL,
         ""
       );
 
@@ -175,6 +197,7 @@ export default function Mregister() {
         className="mt-3 bg-gray-50 px-4 border md:mx-auto text-sm w-72 mx-auto border-gray-300 text-gray-900 rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="example@swiftfi."
         onChange={(e) => setSwiftAlias(e.target.value)}
+        required
       />
       <label className="mt-4 px-10 pt-4 md:mx-auto" htmlFor="">
         Enter CPIN{" "}
@@ -192,6 +215,7 @@ export default function Mregister() {
         maxLength="6"
         className="mt-3 bg-gray-50 px-4 border w-72 mx-auto md:mx-auto border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="secret CPIN..."
+        required
       />
 
       <div className="w-[85%] mx-auto mt-5 md:w-[27%]">

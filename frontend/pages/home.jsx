@@ -119,8 +119,7 @@ export default function Home() {
           ))
         ) : (
           <a>No current request found</a>
-        )}{" "}
-        */}
+        )}
         <div className="mt-3 mx-5">
           <Alert color="info">
             <span>

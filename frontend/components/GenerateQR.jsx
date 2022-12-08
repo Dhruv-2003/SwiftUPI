@@ -25,14 +25,6 @@ export default function GenerateQR() {
     };
     console.log(rid);
   }, []);
-
-  const createQrCode = () => {
-    QRCode.toDataURL("I am a pony!", opts)
-    .then((url) =>{
-      set
-    })
-  }
-
   return (
     <div className="w-full">
       <div className="relative mb-6 w-full flex justify-around items-start rounded-md border-gray-300 border my-4 py-6 px-4">
@@ -62,3 +54,21 @@ export default function GenerateQR() {
     </div>
   );
 }
+
+const opts = {
+  errorCorrectionLevel: "H",
+  type: "terminal",
+  quality: 0.95,
+  margin: 1,
+  color: {
+    dark: "#208698",
+    light: "#FFF",
+  },
+};
+
+export const createQrCode = (text) => {
+  QRCode.toDataURL(text, opts).then((url) => {
+    console.log(url);
+    return url;
+  });
+};
