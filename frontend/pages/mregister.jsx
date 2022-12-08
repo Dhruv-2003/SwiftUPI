@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/Home.module.css";
 import { createWallet, getWallet } from "../helper";
 import { ethers } from "ethers";
@@ -7,27 +7,68 @@ import { encrypt, decrypt } from "@metamask/browser-passworder";
 import HDWalletProvider from "@truffle/hdwallet-provider";
 import { SDKManager_ABI, SDKManager_Address } from "../constants/constants";
 import SmartAccount from "@biconomy/smart-account";
+import Router from "next/router";
 
 export default function Mregister() {
   const [pin, setPin] = useState("");
   const [merchantName, setMerchantName] = useState("");
   const [swiftAlias, setSwiftAlias] = useState("");
+  const [walletExsists, setWalletExsists] = useState(false);
+  const [userExsists, setUserExsists] = useState(false);
 
   const RPC_URL =
     "https://flashy-cold-choice.matic-testnet.discover.quiknode.pro/a27666d2e485f614bdb3ac5b4ed4f59c067a8d28/";
 
+  useEffect(() => {
+    checkWalletandUser();
+  }, []);
+
+  const checkWalletandUser = async () => {
+    try {
+      const walletAddress = localStorage.getItem("walletAddress");
+      console.log(walletAddress);
+      setWalletExsists(true);
+
+      const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
+
+      const SDKManager_contract = new ethers.Contract(
+        SDKManager_Address,
+        SDKManager_ABI,
+        provider
+      );
+
+      const data = await SDKManager_contract.fetchUser(walletAddress);
+      if (data) {
+        setUserExsists(true);
+      }
+
+      if (walletAddress && data) {
+        Router.push("/Dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const createWallet = (password) => {
     try {
-      let randomWallet = ethers.Wallet.createRandom();
-      console.log(randomWallet);
-      console.log(randomWallet._signingKey().privateKey);
-      localStorage.setItem("walletAddress", randomWallet.address);
-      encrypt(password, randomWallet._signingKey().privateKey).then(function (
-        blob
-      ) {
-        localStorage.setItem("wallet", blob);
-        createSCW();
-      });
+      if (!walletExsists) {
+        let randomWallet = ethers.Wallet.createRandom();
+        console.log(randomWallet);
+        console.log(randomWallet._signingKey().privateKey);
+        localStorage.setItem("walletAddress", randomWallet.address);
+        encrypt(password, randomWallet._signingKey().privateKey).then(function (
+          blob
+        ) {
+          localStorage.setItem("wallet", blob);
+          createSCW();
+        });
+      } else if (!userExsists) {
+        addUser();
+      } else {
+        console.log("registeration already complete ");
+        Router.push("/Home");
+      }
     } catch (error) {
       console.log(error);
     }

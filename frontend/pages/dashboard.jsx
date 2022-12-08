@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import avatar from "../assets/avatar.png";
 
 export default function Dashboard() {
+  const [publicKey, setPublicKey] = useState("");
+
+  const fetchUser = async () => {
+    try {
+      const walletAddress = localStorage.getItem("walletAddress");
+      console.log(walletAddress);
+      setPublicKey(walletAddress);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
   return (
     <div className=" text-white flex flex-col text-center">
       <h1 className=" text-3xl mb-0 mt-16 font-bold underline">Dashboard</h1>

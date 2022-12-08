@@ -6,20 +6,20 @@ import avatar from "../assets/avatar.png";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import { Alert, Avatar } from "flowbite-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { listenNotification } from "../Functionality/listenNotifications";
 import { encrypt, decrypt } from "@metamask/browser-passworder";
 
 export default function Home() {
   const [toggle, setToggle] = useState(false);
   const [notifications, setNotifications] = useState();
-  const [publicKey, setpublicKey] = useState(second);
+  const [publicKey, setPublicKey] = useState("");
 
   const fetchUser = async () => {
     try {
       const walletAddress = localStorage.getItem("walletAddress");
       console.log(walletAddress);
-      setpublicKey(walletAddress);
+      setPublicKey(walletAddress);
     } catch (error) {
       console.log(error);
     }
@@ -28,7 +28,12 @@ export default function Home() {
   useEffect(async () => {
     const _notifications = await listenNotification(publicKey);
     setNotifications(_notifications);
+    console.log(_notifications);
   }, [publicKey]);
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <>
@@ -101,7 +106,7 @@ export default function Home() {
           Notifications
         </h2>
         {/* add mapping here for new notifications */}
-        {notifications ? (
+        {/* {notifications ? (
           notifications.map((notification) => (
             <div className="mt-3 mx-5">
               <Alert color="info">
@@ -114,7 +119,15 @@ export default function Home() {
           ))
         ) : (
           <a>No current request found</a>
-        )}
+        )} */}
+        <div className="mt-3 mx-5">
+          <Alert color="info">
+            <span>
+              <span className="font-semibold">New UCPI Request!</span> Dhruv has
+              requested $60
+            </span>
+          </Alert>
+        </div>
       </div>
     </>
   );
