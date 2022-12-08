@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import GenerateQR from "../components/GenerateQR";
 
 export default function gateway() {
+  // create the hook to create a Request , basically calls API in the backend
+  // Model Opens Up
+  // Then passes the ID to the Qr generator below
+  // Or take alias input from the User and then send the request directly to the person using it
+  // Recieve a Confirm Payment message and then close the component
+
+  /// this page is when the gateway / modal is Open
+
+  // default reqId is 2 ,for now , giving Example
+  const [reqId, setReqId] = useState(2);
+
+  // useEffect(() => {}, [third]);
+
   return (
     <div className="flex flex-col text-white">
       <div className=" w-full bg-[#5c80ff] text-black">
@@ -28,7 +41,7 @@ export default function gateway() {
         <label htmlFor="" className="text-xl mt-6 mb-3 font-semibold">
           Pay Using QR Code
         </label>
-        <GenerateQR />
+        <GenerateQR id={reqId} />
       </div>
 
       <div className=" py-6 px-4 flex justify-between items-center w-full absolute bottom-0">

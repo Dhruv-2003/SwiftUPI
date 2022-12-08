@@ -8,23 +8,26 @@ import QRCode from "qrcode";
 
 // import { createQRCode } from "../helper";
 
-export default function GenerateQR() {
+export default function GenerateQR(props) {
   const [qrUrl, setQrUrl] = useState();
+  const [reqId, setReqId] = useState(0);
 
   useEffect(() => {
-    let rid;
-    async () => {
-      rid = await fetch("/api/createRequest", {
-        method: "POST",
-        body: JSON.stringify({
-          creator: "0x",
-          amount: 10,
-          detailsURI: "",
-        })(),
-      });
-    };
-    console.log(rid);
+    if (props.id) {
+      const id = props.id;
+      setReqId(id);
+      console.log(id);
+    }
   }, []);
+
+  const createInQr = () => {
+    const link = `http://localhost:3000/pay/${reqId}`;
+    QRCode.toDataURL(link, opts).then((url) => {
+      console.log(url);
+      setQrUrl(url);
+    });
+  };
+
   return (
     <div className="w-full">
       <div className="relative mb-6 w-full flex justify-around items-start rounded-md border-gray-300 border my-4 py-6 px-4">
@@ -36,7 +39,7 @@ export default function GenerateQR() {
               <Image className="my-auto blur-sm" src={sampleqr} alt="qr" />
               <div className="  mx-2 absolute top-[70px]">
                 <button
-                  onClick={createQrCode}
+                  onClick={createInQr}
                   type="button"
                   className=" w-[120px]  bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md"
                 >

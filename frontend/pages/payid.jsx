@@ -1,10 +1,12 @@
-import Link from 'next/link';
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 import styles from "../styles/Home.module.css";
 
 export default function Payid() {
   const [pin, setPin] = React.useState("");
   const [id, setId] = React.useState("");
+
+  /// Enter the User ID and pay them dierctly ,for the amount selected
 
   return (
     <div className=" text-white flex flex-col">
@@ -30,10 +32,10 @@ export default function Payid() {
       />
 
       <div className="w-[85%] mx-auto mt-5 md:w-[27%]">
-        <Link href={`/pay/${id}`}  className={`${styles.btn} text-xs`}>
+        <Link href={`/pay/${id}`} className={`${styles.btn} text-xs`}>
           Proceed
         </Link>
       </div>
     </div>
-  )
+  );
 }
