@@ -12,21 +12,26 @@ export default function GenerateQR() {
   const [qrUrl, setQrUrl] = useState();
 
   useEffect(() => {
-    let rid
-    (async () => {
-      rid = await fetch('/api/createRequest' , {
+    let rid;
+    async () => {
+      rid = await fetch("/api/createRequest", {
         method: "POST",
         body: JSON.stringify({
           creator: "0x",
           amount: 10,
-          detailsURI: ""
-        })()
-      })
-    })
-    console.log(rid)
+          detailsURI: "",
+        })(),
+      });
+    };
+    console.log(rid);
+  }, []);
 
-  }, [])
-  
+  const createQrCode = () => {
+    QRCode.toDataURL("I am a pony!", opts)
+    .then((url) =>{
+      set
+    })
+  }
 
   return (
     <div className="w-full">
@@ -39,7 +44,7 @@ export default function GenerateQR() {
               <Image className="my-auto blur-sm" src={sampleqr} alt="qr" />
               <div className="  mx-2 absolute top-[70px]">
                 <button
-                  onClick={() => createQrCode()}
+                  onClick={createQrCode}
                   type="button"
                   className=" w-[120px]  bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md"
                 >

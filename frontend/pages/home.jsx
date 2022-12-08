@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import scannpay from "../assets/scannpay.png";
 import landing from "../assets/landing.png";
@@ -54,7 +54,7 @@ export default function Home() {
         </div>
 
         <div className="mt-10 max-w-[320px] mx-auto  ">
-          <Image src={landing} />
+          <Image src={landing} alt="logo" />
         </div>
 
         <div className=" text-white flex flex-col px-4 py-6 pb-14 text-center">
@@ -106,9 +106,9 @@ export default function Home() {
           Notifications
         </h2>
         {/* add mapping here for new notifications */}
-        {/* {notifications ? (
-          notifications.map((notification) => (
-            <div className="mt-3 mx-5">
+        {notifications ? (
+          notifications.map((notification, index) => (
+            <div key={index} className="mt-3 mx-5">
               <Alert color="info">
                 <span>
                   <span className="font-semibold">New UCPI Request!</span> Dhruv
@@ -119,7 +119,8 @@ export default function Home() {
           ))
         ) : (
           <a>No current request found</a>
-        )} */}
+        )}{" "}
+        */}
         <div className="mt-3 mx-5">
           <Alert color="info">
             <span>
