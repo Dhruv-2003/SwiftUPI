@@ -1,5 +1,8 @@
+import { send } from "process";
 import React, { useState, useEffect } from "react";
 import GenerateQR from "../components/GenerateQR";
+import { sendRequest, fetchRequest } from "../Functionality/Request";
+import { fetchUserAlias } from "../Functionality/profile";
 
 export default function gateway() {
   // create the hook to create a Request , basically calls API in the backend
@@ -13,7 +16,35 @@ export default function gateway() {
   // default reqId is 2 ,for now , giving Example
   const [reqId, setReqId] = useState(2);
 
-  // useEffect(() => {}, [third]);
+  const [payerAlias, setPayerAlias] = useState();
+  const [requestSent, setRequestSent] = useState(false);
+  const [requestDetails, setRequestDetails] = useState();
+
+  const fetch = async () => {
+    try {
+      const data = await fetchRequest(reqId);
+      console.log(data);
+      setRequestDetails(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const sendRequestAlias = async () => {
+    try {
+      const response = await fetchUserAlias(payerAlias);
+      console.log(response);
+
+      const payerAddress = response.userAddress;
+
+      const data = await sendRequest(reqId, payerAddress);
+      console.log("Request Sent to the User ");
+      console.log(data);
+      setRequestSent(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex flex-col text-white">
@@ -35,6 +66,8 @@ export default function gateway() {
             id="input-group-1"
             className="bg-gray-50 px-4 mt-4 border w-full border-gray-300 text-gray-300 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="example@swift"
+            onChange={(e) => setPayerAlias(e.target.value)}
+            required
           />
         </div>
 
@@ -49,6 +82,7 @@ export default function gateway() {
         <button
           type="button"
           className=" w-[200px] bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md"
+          onChange={() => sendRequestAlias()}
         >
           Pay Now
         </button>

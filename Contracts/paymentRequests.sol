@@ -163,4 +163,12 @@ contract requestHandler is Ownable {
             _request.amount
         );
     }
+
+    function fetchRequest(uint256 _reqID)
+        public
+        view
+        returns (PaymentRequest memory)
+    {
+        return requests[_reqID];
+    }
 }
