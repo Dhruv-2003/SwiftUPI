@@ -21,7 +21,7 @@ export default function GenerateQR(props) {
   }, []);
 
   const createInQr = () => {
-    const link = `http://localhost:3000/pay/${reqId}`;
+    const link = `payId/${reqId}`;
     QRCode.toDataURL(link, opts).then((url) => {
       console.log(url);
       setQrUrl(url);

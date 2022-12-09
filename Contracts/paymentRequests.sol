@@ -164,11 +164,15 @@ contract requestHandler is Ownable {
         );
     }
 
-    function fetchRequest(uint256 _reqID)
+    function getRequest(uint256 _requestId)
         public
         view
         returns (PaymentRequest memory)
     {
-        return requests[_reqID];
+        return requests[_requestId];
+    }
+
+    function getTotalRequests() public view returns (uint256 _total) {
+        return totalRequests;
     }
 }

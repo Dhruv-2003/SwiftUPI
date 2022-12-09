@@ -10,7 +10,7 @@ Profile Manager , Issuer of  .swift alias , or other aliases can be stored in th
 - Deploy an Biconomy Smart Contract Wallet 
 */
 
-contract profileManager is Ownable {
+contract profileManger is Ownable {
     /// Struct storing the user details
     struct User {
         address userAddress;
@@ -19,7 +19,7 @@ contract profileManager is Ownable {
         string ens;
         string lens;
         string name;
-        string qrCodeCID;
+        string qrCodeCId;
     }
 
     event UserCreated(address _userAddres, string _swiftId, string _name);
